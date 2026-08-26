@@ -36,13 +36,26 @@ slightly narrowed trigger phrases so the skill does not fire on generic "continu
 
 ## Installation
 
-This copy lives in `~/.claude/skills-sources/handoff-skill/` and is symlinked into place:
+```bash
+git clone https://github.com/luna-vulpo/handoff-skill.git
+cd handoff-skill
+
+mkdir -p ~/.claude/skills ~/.claude/commands
+cp -R skills/session-handoff ~/.claude/skills/
+cp commands/handoff.md commands/pickup.md ~/.claude/commands/
+```
+
+From now on `/handoff [optional-topic]` and `/pickup [optional-topic]` work in every project.
+
+Prefer symlinks, so a `git pull` updates the installed copy in place:
 
 ```bash
-ln -s ~/.claude/skills-sources/handoff-skill/skills/session-handoff ~/.claude/skills/session-handoff
-ln -s ~/.claude/skills-sources/handoff-skill/commands/handoff.md ~/.claude/commands/handoff.md
-ln -s ~/.claude/skills-sources/handoff-skill/commands/pickup.md ~/.claude/commands/pickup.md
+ln -s "$PWD/skills/session-handoff" ~/.claude/skills/session-handoff
+ln -s "$PWD/commands/handoff.md"    ~/.claude/commands/handoff.md
+ln -s "$PWD/commands/pickup.md"     ~/.claude/commands/pickup.md
 ```
+
+Skills and commands are loaded at session start, so open a new Claude Code session afterwards.
 
 ## When to hand off
 
